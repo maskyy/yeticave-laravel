@@ -11,10 +11,9 @@ class PageController extends Controller
 {
     public function index()
     {
-        $categories = Category::all();
         $lots = Lot::orderBy('id', 'desc')->take(6)->get();
 
-        return view('index', compact('lots', 'categories'));
+        return view('index', compact('lots'));
     }
 
     public function single($id) {

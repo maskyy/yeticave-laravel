@@ -10,7 +10,7 @@
         <ul class="promo__list">
             @foreach($categories as $category)
                 <li class="promo__item promo__item--{{ $category->alias }}">
-                    <a class="promo__link" href="#">{{ $category->title }}</a>
+                    <a class="promo__link" href="{{ route('category-search', ['id' => $category->id]) }}">{{ $category->title }}</a>
                 </li>
             @endforeach
         </ul>
