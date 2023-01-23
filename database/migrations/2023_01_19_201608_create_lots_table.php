@@ -25,8 +25,8 @@ return new class extends Migration
             $table->foreignId('author_id')->constrained('users');
             $table->foreignId('category_id')->constrained();
             $table->foreignId('winner_id')->nullable()->constrained('users');
-            $table->timestamp('creation_date')->default(New Expression('CURRENT_TIMESTAMP'));
-            $table->timestamp('end_date');
+            $table->timestamp('creation_date')->useCurrent();
+            $table->timestamp('end_date')->nullable();
         });
         DB::statement('ALTER TABLE lots ADD FULLTEXT fulltext_index (title,description)');
     }
