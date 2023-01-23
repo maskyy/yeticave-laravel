@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\LotController;
 use App\Http\Controllers\PageController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -22,3 +23,6 @@ Route::get('/lots/{id}', [PageController::class, 'single'])->name('lot-page');
 Route::get('/lots/category/{id}', [LotController::class, 'searchByCategory'])->name(('category-search'));
 
 Route::get('/search', [LotController::class, 'search'])->name('search');
+
+Route::get('/sign-up', [PageController::class, 'signup'])->name('signup-page');
+Route::post('/sign-up', [UserController::class, 'signup'])->name('signup');
