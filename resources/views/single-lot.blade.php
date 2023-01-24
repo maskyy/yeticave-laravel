@@ -5,7 +5,7 @@
 @section('page-content')
 <x-nav></x-nav>
 <section class="lot-item container">
-    <h2>DC Ply Mens 2016/2017 Snowboard</h2>
+    <h2>{{ $lot->title }}</h2>
     <div class="lot-item__content">
         <div class="lot-item__left">
             <div class="lot-item__image">

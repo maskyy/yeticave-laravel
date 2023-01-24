@@ -35,7 +35,9 @@
             <span class="form__error">Напишите как с вами связаться</span>
         @enderror
       </div>
-      <span class="form__error form__error--bottom">Пожалуйста, исправьте ошибки в форме.</span>
+      @if ($errors->any())
+        <span class="form__error form__error--bottom">Пожалуйста, исправьте ошибки в форме.</span>
+      @endif
       <button type="submit" class="button">Зарегистрироваться</button>
       <a class="text-link" href="#">Уже есть аккаунт</a>
     </form>

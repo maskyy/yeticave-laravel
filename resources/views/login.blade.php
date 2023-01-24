@@ -8,7 +8,7 @@
     action="{{ route('login') }}" method="post">
       @csrf
       <h2>Вход</h2>
-      <div class="form__item @error('email') form__item--invalid @enderror"> <!-- form__item--invalid -->
+      <div class="form__item @error('email') form__item--invalid @enderror">
         <label for="email">E-mail <sup>*</sup></label>
         <input id="email" type="text" name="email" placeholder="Введите e-mail" value="{{ old('email') }}">
         @error('email')

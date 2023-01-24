@@ -34,6 +34,6 @@ class PageController extends Controller
     }
 
     public function addLot() {
-
+        return view('add-lot');
     }
 }

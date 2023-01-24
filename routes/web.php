@@ -34,4 +34,5 @@ Route::get('/logout', [UserController::class, 'logout'])->name('logout');
 
 Route::get('/403', [PageController::class, 'error403'])->name('403');
 
-Route::get('/add-lot', [PageController::class, 'addLot'])->middleware('customAuth');
+Route::get('/add-lot', [PageController::class, 'addLot'])->name('add-lot-page')->middleware('customAuth');
+Route::post('/add-lot', [LotController::class, 'addLot'])->name('add-lot')->middleware('customAuth');

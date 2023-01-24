@@ -1,6 +1,6 @@
 @extends('layout')
 
-@section('title', 'Вход')
+@section('title', 'Доступ запрещён')
 
 @section('page-content')
     <x-nav></x-nav>

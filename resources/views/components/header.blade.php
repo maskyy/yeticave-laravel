@@ -8,7 +8,7 @@
             <input type="search" name="search" placeholder="Поиск лота">
             <input class="main-header__search-btn" type="submit" name="find" value="Найти">
         </form>
-        <a class="main-header__add-lot button" href="#">Добавить лот</a>
+        <a class="main-header__add-lot button" href="{{ route('add-lot-page') }}">Добавить лот</a>
         <nav class="user-menu">
             @if (Auth::user())
                 <div class="user-menu__logged">
