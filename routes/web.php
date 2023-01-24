@@ -36,3 +36,5 @@ Route::get('/403', [PageController::class, 'error403'])->name('403');
 
 Route::get('/add-lot', [PageController::class, 'addLot'])->name('add-lot-page')->middleware('customAuth');
 Route::post('/add-lot', [LotController::class, 'addLot'])->name('add-lot')->middleware('customAuth');
+
+Route::get('/my-bets', [PageController::class, 'myBets'])->name('my-bets')->middleware('customAuth');

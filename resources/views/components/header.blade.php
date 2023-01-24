@@ -13,7 +13,7 @@
             @if (Auth::user())
                 <div class="user-menu__logged">
                     <p>{{ Auth::user()->name }}</p>
-                    <a class="user-menu__bets user-menu" href="#">Мои ставки</a>
+                    <a class="user-menu__bets user-menu" href="{{ route('my-bets') }}">Мои ставки</a>
                     <a class="user-menu__logout" href="{{ route('logout') }}">Выход</a>
                 </div>
             @else

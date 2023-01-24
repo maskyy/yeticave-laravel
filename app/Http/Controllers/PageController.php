@@ -4,7 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Models\Category;
 use App\Models\Lot;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 class PageController extends Controller
@@ -35,5 +38,12 @@ class PageController extends Controller
 
     public function addLot() {
         return view('add-lot');
+    }
+
+    public function myBets() {
+        Carbon::setLocale('ru');
+        $user = Auth::user();
+        $bets = $user->bets()->get();
+        return view('my-bets', compact('bets'));
     }
 }
