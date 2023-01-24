@@ -24,4 +24,16 @@ class PageController extends Controller
     public function signup() {
         return view('sign-up');
     }
+
+    public function login() {
+        return view('login');
+    }
+
+    public function error403() {
+        return view('403');
+    }
+
+    public function addLot() {
+
+    }
 }

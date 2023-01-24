@@ -10,19 +10,19 @@
         </form>
         <a class="main-header__add-lot button" href="#">Добавить лот</a>
         <nav class="user-menu">
-            @if(Auth::user())
+            @if (Auth::user())
                 <div class="user-menu__logged">
-                    <p>{{Auth::user()->name}}</p>
+                    <p>{{ Auth::user()->name }}</p>
                     <a class="user-menu__bets user-menu" href="#">Мои ставки</a>
-                    <a class="user-menu__logout" href="#">Выход</a>
+                    <a class="user-menu__logout" href="{{ route('logout') }}">Выход</a>
                 </div>
             @else
                 <ul class="user-menu__list">
                     <li class="user-menu__item">
-                        <a href="#">Регистрация</a>
+                        <a href="{{ route('signup-page') }}">Регистрация</a>
                     </li>
                     <li class="user-menu__item">
-                        <a href="#">Вход</a>
+                        <a href="{{ route('login-page') }}">Вход</a>
                     </li>
                 </ul>
             @endif

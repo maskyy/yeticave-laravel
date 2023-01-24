@@ -26,3 +26,12 @@ Route::get('/search', [LotController::class, 'search'])->name('search');
 
 Route::get('/sign-up', [PageController::class, 'signup'])->name('signup-page');
 Route::post('/sign-up', [UserController::class, 'signup'])->name('signup');
+
+Route::get('/login', [PageController::class, 'login'])->name('login-page');
+Route::post('/login',[UserController::class, 'login'])->name('login');
+
+Route::get('/logout', [UserController::class, 'logout'])->name('logout');
+
+Route::get('/403', [PageController::class, 'error403'])->name('403');
+
+Route::get('/add-lot', [PageController::class, 'addLot'])->middleware('customAuth');
