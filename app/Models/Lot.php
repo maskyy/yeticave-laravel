@@ -18,4 +18,10 @@ class Lot extends Model
     public function bets() {
         return $this->hasMany(Bet::class);
     }
+
+    public function minBet() {
+        $bets = $this->bets()->orderByDesc('bet_date')->get();
+        $current = $bets[0]->bet_price ?? $this->price;
+        return $current + $this->bet_step;
+    }
 }

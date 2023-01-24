@@ -21,7 +21,8 @@ class PageController extends Controller
 
     public function single($id) {
         $lot = Lot::findOrFail($id);
-        return view('single-lot', compact('lot'));
+        $bets = $lot->bets()->get();
+        return view('single-lot', compact('lot', 'bets'));
     }
 
     public function signup() {

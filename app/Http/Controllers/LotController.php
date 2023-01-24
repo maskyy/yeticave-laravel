@@ -56,4 +56,16 @@ class LotController extends Controller
 
         return redirect(route('lot-page', ['id' => $lot->id]));
     }
+
+    public function addBet($id, Request $request) {
+        $lot = Lot::findOrFail($id);
+        $validator = Validator::make($request->all(), [
+            'cost' => 'required'
+        ], [
+            'required' => 'Введите ставку'
+        ]);
+
+        $bets = $lot->bets()->get();
+        return view('single-lot', compact('lot', 'bets'));
+    }
 }

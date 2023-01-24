@@ -25,20 +25,23 @@
                         <span class="lot-item__cost">{{ $lot->price }}</span>
                     </div>
                     <div class="lot-item__min-cost">
-                        Мин. ставка <span>{{ $lot->price + $lot->bet_step }}</span>
+                        Мин. ставка <span>{{ $lot->minBet() }}</span>
                     </div>
                 </div>
-                <form class="lot-item__form" action="https://echo.htmlacademy.ru" method="post" autocomplete="off">
-                    <p class="lot-item__form-item form__item form__item--invalid">
+                <form class="lot-item__form" action="" method="post" autocomplete="off">
+                    @csrf
+                    <p class="lot-item__form-item form__item @error('cost') form__item--invalid @enderror">
                         <label for="cost">Ваша ставка</label>
-                        <input id="cost" type="text" name="cost" placeholder="{{ $lot->price + $lot->bet_step }}">
-                        <span class="form__error">Введите наименование лота</span>
+                        <input id="cost" type="text" name="cost" placeholder="{{ $lot->minBet() }}" value="{{ old('cost') }}">
+                        @error('cost')
+                            <span class="form__error">{{ $message }}</span>
+                        @enderror
                     </p>
                     <button type="submit" class="button">Сделать ставку</button>
                 </form>
             </div>
             <div class="history">
-                <h3>История ставок (<span>10</span>)</h3>
+                <h3>История ставок (<span>{{ count($bets) }}</span>)</h3>
                 <table class="history__list">
                     <tr class="history__item">
                         <td class="history__name">Иван</td>
