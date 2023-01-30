@@ -41,12 +41,4 @@ class PageController extends Controller
     public function addLot() {
         return view('add-lot');
     }
-
-    public function myBets() {
-        Carbon::setLocale('ru');
-        /** @var User */
-        $user = Auth::user();
-        $bets = $user->bets()->get();
-        return view('my-bets', compact('bets'));
-    }
 }

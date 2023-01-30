@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\BetController;
 use App\Http\Controllers\LotController;
 use App\Http\Controllers\PageController;
 use App\Http\Controllers\UserController;
@@ -19,7 +20,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', [PageController::class, 'index'])->name('main-page');
 
 Route::get('/lots/{id}', [PageController::class, 'single'])->name('lot-page');
-Route::post('/lots/{id}', [LotController::class, 'addBet'])->name('add-bet')->middleware('customAuth');
+Route::post('/lots/{id}', [BetController::class, 'addBet'])->name('add-bet')->middleware('customAuth');
 
 Route::get('/lots/category/{id}', [LotController::class, 'searchByCategory'])->name(('category-search'));
 
@@ -38,4 +39,6 @@ Route::get('/403', [PageController::class, 'error403'])->name('403');
 Route::get('/add-lot', [PageController::class, 'addLot'])->name('add-lot-page')->middleware('customAuth');
 Route::post('/add-lot', [LotController::class, 'addLot'])->name('add-lot')->middleware('customAuth');
 
-Route::get('/my-bets', [PageController::class, 'myBets'])->name('my-bets')->middleware('customAuth');
+Route::resource('bets', BetController::class)->only([
+    'index', 'store', 'destroy'
+])->middleware('customAuth');

@@ -11,7 +11,7 @@
             <tr class="rates__item">
                 <td class="rates__info">
                     <div class="rates__img">
-                        <img src="{{ $bet->lot->url }}" width="54" height="40" alt="{{ $bet->lot->title }}">
+                        <img src="/{{ $bet->lot->url }}" width="54" height="40" alt="{{ $bet->lot->title }}">
                     </div>
                     <h3 class="rates__title"><a href="{{ route('lot-page', ['id' => $bet->lot->id]) }}">{{ $bet->lot->title }}</a></h3>
                 </td>

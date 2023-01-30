@@ -24,4 +24,10 @@ class Lot extends Model
         $current = $bets[0]->bet_price ?? $this->price;
         return $current + $this->bet_step;
     }
+
+    public function currentPrice() {
+        $bets = $this->bets()->orderByDesc('bet_date')->get();
+        $current = $bets[0]->bet_price ?? $this->price;
+        return $current;
+    }
 }
