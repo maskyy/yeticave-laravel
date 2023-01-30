@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Bet;
 use App\Models\Category;
 use App\Models\Lot;
 use Illuminate\Http\Request;
@@ -59,13 +60,27 @@ class LotController extends Controller
 
     public function addBet($id, Request $request) {
         $lot = Lot::findOrFail($id);
+        $min_bet = $lot->minBet();
         $validator = Validator::make($request->all(), [
-            'cost' => 'required'
+            'cost' => 'required|integer|min:' . $min_bet
         ], [
-            'required' => 'Введите ставку'
+            'required' => 'Введите ставку',
+            'integer' => 'Ставка должна быть целым числом',
+            'min' => 'Ставка должна быть не меньше ' . $min_bet
         ]);
 
-        $bets = $lot->bets()->get();
-        return view('single-lot', compact('lot', 'bets'));
+        if ($validator->fails()) {
+            return redirect(route('lot-page', $id))
+                ->withErrors($validator)
+                ->withInput();
+        }
+
+        $bet = new Bet();
+        $bet->bet_price = request('cost');
+        $bet->author_id = Auth::user()->id;
+        $bet->lot_id = $id;
+        $bet->save();
+
+        return redirect(route('lot-page', $id));
     }
 }
