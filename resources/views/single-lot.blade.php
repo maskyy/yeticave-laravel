@@ -28,6 +28,7 @@
                         Мин. ставка <span>{{ $lot->minBet() }}</span>
                     </div>
                 </div>
+                @if ($user_id !== null && (count($bets) === 0 || $bets[count($bets) - 1]->author->id !== $user_id))
                 <form class="lot-item__form" action="" method="post" autocomplete="off">
                     @csrf
                     <p class="lot-item__form-item form__item @error('cost') form__item--invalid @enderror">
@@ -39,6 +40,7 @@
                     </p>
                     <button type="submit" class="button">Сделать ставку</button>
                 </form>
+                @endif
             </div>
             <div class="history">
                 <h3>История ставок (<span>{{ count($bets) }}</span>)</h3>

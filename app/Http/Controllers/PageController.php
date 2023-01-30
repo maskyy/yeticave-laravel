@@ -22,7 +22,8 @@ class PageController extends Controller
     public function single($id) {
         $lot = Lot::findOrFail($id);
         $bets = $lot->bets()->get();
-        return view('single-lot', compact('lot', 'bets'));
+        $user_id = Auth::user()->id ?? null;
+        return view('single-lot', compact('lot', 'bets', 'user_id'));
     }
 
     public function signup() {
@@ -43,6 +44,7 @@ class PageController extends Controller
 
     public function myBets() {
         Carbon::setLocale('ru');
+        /** @var User */
         $user = Auth::user();
         $bets = $user->bets()->get();
         return view('my-bets', compact('bets'));
