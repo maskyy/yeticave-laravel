@@ -21,7 +21,7 @@ class Bet extends Model
     }
 
     public function isWinner() {
-        return $this->lot->winner_id == $this->author_id;
+        return $this->lot->winner_id === $this->author_id;
     }
 
     public function setCssBetModifier() {

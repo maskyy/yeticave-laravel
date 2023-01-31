@@ -42,6 +42,13 @@
                     <button type="submit" class="button">Сделать ставку</button>
                 </form>
                 @endif
+                @if (count($bets) === 0 && $user_id === $lot->author_id)
+                <form action="{{ route('delete-lot', $lot->id) }}" method="post">
+                    @csrf
+                    @method('DELETE')
+                    <input type="submit" value="Удалить">
+                </form>
+                @endif
             </div>
             <div class="history">
                 <h3>История ставок (<span>{{ count($bets) }}</span>)</h3>

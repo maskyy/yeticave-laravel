@@ -66,7 +66,12 @@ class BetController extends Controller
      */
     public function destroy($id)
     {
+        $user_id = Auth::user()->id;
         $bet = Bet::findOrFail($id);
+        if ($bet->author_id !== $user_id) {
+            return redirect(route('error403'));
+        }
+
         $bet->delete();
 
         return redirect(route('bets.index'));

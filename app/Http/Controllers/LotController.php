@@ -56,4 +56,16 @@ class LotController extends Controller
 
         return redirect(route('lot-page', ['id' => $lot->id]));
     }
+
+    public function removeLot($id) {
+        $user_id = Auth::user()->id;
+        $lot = Lot::findOrFail($id);
+
+        if ($user_id !== $lot->author_id) {
+            return redirect(route('error403'));
+        }
+
+        $lot->delete();
+        return redirect(route('main-page'));
+    }
 }
