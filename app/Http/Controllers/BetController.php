@@ -18,7 +18,6 @@ class BetController extends Controller
      */
     public function index()
     {
-        Carbon::setLocale('ru');
         /** @var User */
         $user = Auth::user();
         $bets = $user->bets()->get();
@@ -33,10 +32,7 @@ class BetController extends Controller
      */
     public function store(Request $request)
     {
-        dd($request->all());
-    }
-
-    public function addBet($id, Request $request) {
+        $id = request('id');
         $lot = Lot::findOrFail($id);
         $min_bet = $lot->minBet();
         $validator = Validator::make($request->all(), [
@@ -70,6 +66,9 @@ class BetController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $bet = Bet::findOrFail($id);
+        $bet->delete();
+
+        return redirect(route('bets.index'));
     }
 }

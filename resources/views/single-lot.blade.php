@@ -29,9 +29,10 @@
                     </div>
                 </div>
                 @if ($user_id !== null && (count($bets) === 0 || $bets[count($bets) - 1]->author->id !== $user_id))
-                <form class="lot-item__form" action="" method="post" autocomplete="off">
+                <form class="lot-item__form" action="{{ route('bets.store') }}" method="post" autocomplete="off">
                     @csrf
                     <p class="lot-item__form-item form__item @error('cost') form__item--invalid @enderror">
+                        <input type="hidden" name="id" value="{{ $lot->id }}">
                         <label for="cost">Ваша ставка</label>
                         <input id="cost" type="text" name="cost" placeholder="{{ $lot->minBet() }}" value="{{ old('cost') }}">
                         @error('cost')

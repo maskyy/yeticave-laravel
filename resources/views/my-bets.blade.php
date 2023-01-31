@@ -31,6 +31,13 @@
                 <td class="rates__time">
                     {{ $bet->formatDate() }}
                 </td>
+                <td>
+                    <form action="{{ route('bets.destroy', $bet->id) }}" method="post">
+                        @csrf
+                        @method('DELETE')
+                        <input type="submit" value="Удалить">
+                    </form>
+                </td>
             </tr>
             @endforeach
         </table>
