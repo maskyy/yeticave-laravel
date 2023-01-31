@@ -29,24 +29,36 @@
                     </div>
                 </div>
                 @if ($user_id !== null && (count($bets) === 0 || $bets[count($bets) - 1]->author->id !== $user_id))
-                <form class="lot-item__form" action="{{ route('bets.store') }}" method="post" autocomplete="off">
-                    @csrf
-                    <p class="lot-item__form-item form__item @error('cost') form__item--invalid @enderror">
-                        <input type="hidden" name="id" value="{{ $lot->id }}">
-                        <label for="cost">Ваша ставка</label>
-                        <input id="cost" type="text" name="cost" placeholder="{{ $lot->minBet() }}" value="{{ old('cost') }}">
-                        @error('cost')
-                            <span class="form__error">{{ $message }}</span>
-                        @enderror
-                    </p>
-                    <button type="submit" class="button">Сделать ставку</button>
-                </form>
+                    <form class="lot-item__form" action="{{ route('bets.store') }}" method="post" autocomplete="off">
+                        @csrf
+                        <p class="lot-item__form-item form__item @error('cost') form__item--invalid @enderror">
+                            <input type="hidden" name="id" value="{{ $lot->id }}">
+                            <label for="cost">Ваша ставка</label>
+                            <input id="cost" type="text" name="cost" placeholder="{{ $lot->minBet() }}" value="{{ old('cost') }}">
+                            @error('cost')
+                                <span class="form__error">{{ $message }}</span>
+                            @enderror
+                        </p>
+                        <button type="submit" class="button">Сделать ставку</button>
+                    </form>
                 @endif
                 @if (count($bets) === 0 && $user_id === $lot->author_id)
-                <form action="{{ route('delete-lot', $lot->id) }}" method="post">
+                    <form action="{{ route('delete-lot', $lot->id) }}" method="post">
+                        @csrf
+                        @method('DELETE')
+                        <input type="submit" value="Удалить">
+                    </form>
+                @endif
+                @if ($user_id !== null)
+                <form action="{{ route($lot->isFavorite() ? 'favorites.destroy' : 'favorites.store', $lot->id) }}" method="post">
                     @csrf
-                    @method('DELETE')
-                    <input type="submit" value="Удалить">
+                    @if ($lot->isFavorite())
+                        @method('DELETE')
+                        <input type="submit" value="Удалить из избранных">
+                    @else
+                        <input type="hidden" name="lot-id" value="{{ $lot->id }}">
+                        <input type="submit" value="В избранные">
+                    @endif
                 </form>
                 @endif
             </div>

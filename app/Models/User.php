@@ -47,4 +47,8 @@ class User extends Authenticatable
     public function bets() {
         return $this->hasMany(Bet::class, 'author_id');
     }
+
+    public function favorites() {
+        return $this->hasMany(Favorite::class);
+    }
 }

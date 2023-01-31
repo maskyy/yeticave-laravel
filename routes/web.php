@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\BetController;
+use App\Http\Controllers\FavoriteController;
 use App\Http\Controllers\LotController;
 use App\Http\Controllers\PageController;
 use App\Http\Controllers\UserController;
@@ -40,5 +41,9 @@ Route::get('/add-lot', [PageController::class, 'addLot'])->name('add-lot-page')-
 Route::post('/add-lot', [LotController::class, 'addLot'])->name('add-lot')->middleware('customAuth');
 
 Route::resource('bets', BetController::class)->only([
+    'index', 'store', 'destroy'
+])->middleware('customAuth');
+
+Route::resource('favorites', FavoriteController::class)->only([
     'index', 'store', 'destroy'
 ])->middleware('customAuth');
