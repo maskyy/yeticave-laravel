@@ -13,6 +13,9 @@
             @isset($search)
             <h2>Результаты поиска по запросу «<span>{{ $search }}</span>»</h2>
             @endisset
+            @isset($favorites)
+            <h2>Избранные лоты</h2>
+            @endisset
             <ul class="lots__list">
                 @foreach ($lots as $lot)
                     <x-lot :$lot></x-lot>
@@ -34,6 +37,9 @@
             @endisset
             @isset($search)
                 <h2>Результатов поиска по запросу «<span>{{ $search }}</span>» нет.</h2>
+            @endisset
+            @isset($favorites)
+                <h2>Избранных лотов пока нет.</h2>
             @endisset
         </section>
     @endif

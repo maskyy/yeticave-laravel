@@ -1,23 +1,13 @@
 <footer class="main-footer">
     <nav class="nav">
         <ul class="nav__list container">
+            @foreach ($categories as $category)
+                <li class="nav__item">
+                    <a href="{{ route('category-search', ['id' => $category->id]) }}">{{ $category->title }}</a>
+                </li>
+            @endforeach
             <li class="nav__item">
-                <a href="#">Доски и лыжи</a>
-            </li>
-            <li class="nav__item">
-                <a href="#">Крепления</a>
-            </li>
-            <li class="nav__item">
-                <a href="#">Ботинки</a>
-            </li>
-            <li class="nav__item">
-                <a href="#">Одежда</a>
-            </li>
-            <li class="nav__item">
-                <a href="#">Инструменты</a>
-            </li>
-            <li class="nav__item">
-                <a href="#">Разное</a>
+                <a href="{{ route('favorites.index') }}">Избранные</a>
             </li>
         </ul>
     </nav>

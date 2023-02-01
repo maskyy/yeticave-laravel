@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Favorite;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -15,7 +16,12 @@ class FavoriteController extends Controller
      */
     public function index()
     {
-        //
+        $favorites = Auth::user()->favorites;
+        $lots = $favorites->map(function ($fav) {
+            return $fav->lot;
+        });
+
+        return view('search', compact('favorites', 'lots'));
     }
 
     /**
@@ -47,7 +53,11 @@ class FavoriteController extends Controller
     {
         $user_id = Auth::user()->id;
 
-        $fav = Favorite::where('user_id', $user_id)->where('lot_id', $id)->get;
-        dd($fav);
+        $fav = Favorite::where('user_id', $user_id)->where('lot_id', $id)->take(1);
+        if ($fav) {
+            $fav->delete();
+        }
+
+        return redirect(route('lot-page', $id));
     }
 }
